@@ -1,0 +1,34 @@
+name: Build Project
+
+on:
+  push:
+    branches:
+      - main  # Запуск при изменении в основной ветке
+  pull_request:
+    branches:
+      - main  # Запуск при создании PR в основной ветке
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up .NET
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: '7.x'
+
+      - name: Restore dependencies
+        run: dotnet restore RPBDIS_LibraryDB_lab3/RPBDIS_LibraryDB_lab3  # Укажите путь к .sln или .csproj файлу
+
+      - name: Build project
+        run: dotnet build RPBDIS_LibraryDB_lab3/RPBDIS_LibraryDB_lab3 --configuration Release --no-restore
+
+      - name: Run tests
+        run: dotnet test RPBDIS_LibraryDB_lab3/RPBDIS_LibraryDB_lab3 --no-build --verbosity normal
