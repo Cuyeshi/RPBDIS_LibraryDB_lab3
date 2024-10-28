@@ -29,12 +29,12 @@ jobs:
 
       # Восстанавливаем зависимости
       - name: Restore dependencies
-        run: dotnet restore RPBDIS_LibraryDB_lab3/RPBDIS_LibraryDB_lab3/RPBDIS_LibraryDB_lab3.sln  # Укажите путь к файлу `.sln` или `.csproj`
+        run: dotnet restore RPBDIS_LibraryDB_lab3/RPBDIS_LibraryDB_lab3.sln  # Укажите путь к файлу `.sln` или `.csproj`
 
       # Компилируем проект
       - name: Build project
-        run: dotnet build RPBDIS_LibraryDB_lab3/RPBDIS_LibraryDB_lab3/RPBDIS_LibraryDB_lab3.sln --configuration Release --no-restore
+        run: dotnet build RPBDIS_LibraryDB_lab3/RPBDIS_LibraryDB_lab3.sln --configuration Release --no-restore
 
       # Запускаем тесты (если они есть)
       - name: Run tests
-        run: dotnet test RPBDIS_LibraryDB_lab3/RPBDIS_LibraryDB_lab3/RPBDIS_LibraryDB_lab3.sln --no-build --verbosity normal
+        run: dotnet test RPBDIS_LibraryDB_lab3/RPBDIS_LibraryDB_lab3.sln --no-build --verbosity normal
