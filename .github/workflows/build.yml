@@ -3,17 +3,17 @@ name: Build Project
 on:
   push:
     branches:
-      - main  # Запуск при изменении в основной ветке (можно изменить ветку)
+      - main  # Запуск при изменении в основной ветке
   pull_request:
     branches:
       - main  # Запуск при создании PR в основной ветке
 
 jobs:
   build:
-    runs-on: ubuntu-latest  # Можно изменить на нужную платформу CI-сервера
+    runs-on: ubuntu-latest
     strategy:
       matrix:
-        os: [ubuntu-latest, windows-latest]  # Сборка под две платформы
+        os: [ubuntu-latest, windows-latest]
 
     steps:
       - name: Checkout repository
@@ -22,13 +22,13 @@ jobs:
       - name: Set up .NET
         uses: actions/setup-dotnet@v3
         with:
-          dotnet-version: '7.x'  # Указать версию .NET SDK для проекта
+          dotnet-version: '7.x'
 
       - name: Restore dependencies
-        run: dotnet restore
+        run: dotnet restore RPBDIS_LibraryDB_lab3/RPBDIS_LibraryDB_lab3  # Укажите путь к .sln или .csproj файлу
 
       - name: Build project
-        run: dotnet build --configuration Release --no-restore
+        run: dotnet build RPBDIS_LibraryDB_lab3/RPBDIS_LibraryDB_lab3 --configuration Release --no-restore
 
       - name: Run tests
-        run: dotnet test --no-build --verbosity normal
+        run: dotnet test RPBDIS_LibraryDB_lab3/RPBDIS_LibraryDB_lab3 --no-build --verbosity normal
